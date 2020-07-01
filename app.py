@@ -6,7 +6,6 @@ from flask import Response
 APP.register_blueprint(photo_bl, url_prefix="/photo")
 
 
-
 @APP.route('/', defaults={'path': ''})
 @APP.route('/<path:path>')
 def catch_all(path, **options):

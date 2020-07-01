@@ -16,6 +16,7 @@ def admin():
     for photo in query:
         result.append({
             "ip": photo.ip,
+            "url": photo.url,
             "query": str(photo.query_txt),
             "time": photo.time
         })
@@ -29,8 +30,9 @@ def admin():
 @photo_bl.route('/<path:path>')
 def catch_all(path, **options):
     query = request.query_string
+    url = request.path
     ip = request.remote_addr
-    photo = Photo(ip, query)
+    photo = Photo(ip, url, query)
     DB.session.add(photo)
     DB.session.commit()
     APP.logger.info("Opened photo from %s with query %s", ip, query)
