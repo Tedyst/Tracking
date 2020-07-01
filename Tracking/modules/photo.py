@@ -27,28 +27,16 @@ def admin_path(path):
             "result": []
         }, 403
     for photo in query:
-        if more_data:
-            asd = {
-                "more_data": True,
-                "data": more_data,
-                "uuid": path,
-                "query": photo["query"],
-                "url": photo["url"],
-                "ip": photo["ip"]
-            }
-        else:
-            asd = {
-                "more_data": False,
-                "data": {},
-                "uuid": path,
-                "query": photo["query"],
-                "url": photo["url"],
-                "ip": photo["ip"]
-            }
-        result.append(asd)
+        result.append({
+            "data": more_data["data"],
+            "query": photo["query"],
+            "ip": photo["ip"]
+        })
     return {
         "success": True,
-        "result": result
+        "result": result,
+        "uuid": path,
+        "url": more_data["url"]
     }
 
 
